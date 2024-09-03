@@ -53,6 +53,7 @@ def _(node: OnnxNode, graph: OnnxGraph) -> OperationConverterResult:
         onnx_padding=node_attributes.get('pads', [0] * spatial_rank * 2),
         auto_pad=node_attributes.get('auto_pad', 'NOTSET'),
     )
+    
     common_kwargs = {
         'kernel_size': node_attributes.get('kernel_shape', weights.shape[2:]),
         'stride': node_attributes.get('strides', 1),

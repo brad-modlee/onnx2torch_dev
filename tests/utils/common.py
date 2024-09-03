@@ -127,6 +127,8 @@ def calc_ort_outputs(  # pylint: disable=missing-function-docstring
     inputs: Dict[str, Any],
     skip_unused_inputs: bool = False,
 ) -> List[Any]:
+
+
     ort_session = ort.InferenceSession(
         model.SerializeToString(),
         providers=['CPUExecutionProvider'],
@@ -135,6 +137,9 @@ def calc_ort_outputs(  # pylint: disable=missing-function-docstring
     if skip_unused_inputs:
         graph_inputs = [i.name for i in model.graph.input]
         inputs = {k: v for k, v in inputs.items() if k in graph_inputs}
+
+    for k,v in inputs.items():
+        print(f'k={k},v={v.shape}')
 
     outputs = ort_session.run(
         output_names=None,
@@ -206,7 +211,9 @@ def _check_onnx_model(
     ignore_export_checker: bool = False,
     opset_version: int = 13,
 ) -> None:
+    
     ort_outputs = calc_ort_outputs(onnx_model, onnx_inputs)
+        
     torch_outputs = calc_torch_outputs(onnx_model, onnx_inputs, device='cpu')
 
     onnx_torch_check_function(ort_outputs, torch_outputs)

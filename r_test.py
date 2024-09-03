@@ -71,6 +71,7 @@ def test_conv2d_base_params() -> None:  # pylint: disable=missing-function-docst
             input_hw=input_hw,
             kernel_shape=kernel_shape,
         )
+        STOP
 
     in_out_channels_variants = (2, 3, 4, 16)
     all_variants = product(op_type_variants, in_out_channels_variants, input_hw_variants, kernel_shape_variants)
@@ -83,7 +84,10 @@ def test_conv2d_base_params() -> None:  # pylint: disable=missing-function-docst
             kernel_shape=kernel_shape,
             group=in_out_channels,
         )
+        STOP
 
+
+test_conv2d_base_params()
 
 def test_conv_stride_dilations_pads() -> None:  # pylint: disable=missing-function-docstring
     input_hw_variants = ((32, 32), (32, 27), (27, 32), (27, 27))

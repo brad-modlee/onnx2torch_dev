@@ -57,6 +57,14 @@ or
 conda install -c conda-forge onnx2torch
 ```
 
+### Notes
+
+- you may also need to install onnxruntume via
+```bash
+pip install onnxruntime
+```
+
+
 ## Usage
 
 Below you can find some examples of use.
